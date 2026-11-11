@@ -1,0 +1,35 @@
+{
+  "as_of": "2026-10-26",
+  "body_policy": "one row per deal; sorted distinct group set plus primary group",
+  "limitations": [
+    "2026-10-26 source outlier marks may not have been refreshed by the nightly job.",
+    "Historical labels contain mixed customer, forwarder and carrier roles as required.",
+    "Future scoring covers DQ-valid simple requests available in core; quarantined requests are excluded.",
+    "A three-month training window cannot establish a complete annual seasonal pattern or long-term trend.",
+    "This is a fixed-snapshot evaluation, not a reconstruction of historical source versions."
+  ],
+  "metrics": {
+    "mae_rub": 27873.065224959657,
+    "mape_pct": 15.229751720365789,
+    "r2": 0.9210610930401197,
+    "rmse_rub": 53749.40721115545
+  },
+  "model_id": "catboost-d987c0665869b3134e33b334",
+  "model_name": "CatBoostRegressor",
+  "prediction_data_hash": "b02983cbeebe5d00ed33363faf4394d46e3ed52ef261acfd94f83c820cbbb31a",
+  "rows": {
+    "extracted": 51012,
+    "future": 5820,
+    "predictions": 18628,
+    "test": 12808,
+    "train": 24226
+  },
+  "split": {
+    "test_end_inclusive": "2026-10-26",
+    "test_start_inclusive": "2026-10-05",
+    "train_end_exclusive": "2026-10-05",
+    "train_start_inclusive": "2026-07-26"
+  },
+  "target": "price_rub; all valid factual price_type values per assignment",
+  "test_data_hash": "bee2f912bdc3517d728345c81e1f497279876643d5a26df48d3d3fd8681dffb1"
+}

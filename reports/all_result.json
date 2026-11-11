@@ -1,0 +1,62 @@
+{
+  "run_id": "a2f67f67-24df-47e5-9917-b60248a57598",
+  "command": "all",
+  "as_of": "2026-10-26",
+  "window": {
+    "start_date": "2023-10-03",
+    "end_date_exclusive": "2027-02-14"
+  },
+  "etl": {
+    "dq_reasons": {
+      "MISSING_RATE_DATE": 39,
+      "NONPOSITIVE_PRICE": 164
+    },
+    "source_rows": 300000,
+    "accepted_rows": 299797,
+    "quarantined_rows": 203,
+    "source_deleted_rows": 0,
+    "mart_rows": 203644
+  },
+  "ml": {
+    "as_of": "2026-10-26",
+    "model_id": "catboost-d987c0665869b3134e33b334",
+    "model_name": "CatBoostRegressor",
+    "split": {
+      "train_start_inclusive": "2026-07-26",
+      "train_end_exclusive": "2026-10-05",
+      "test_start_inclusive": "2026-10-05",
+      "test_end_inclusive": "2026-10-26"
+    },
+    "rows": {
+      "extracted": 51012,
+      "train": 24226,
+      "test": 12808,
+      "future": 5820,
+      "predictions": 18628
+    },
+    "metrics": {
+      "r2": 0.9210610930401197,
+      "mape_pct": 15.229751720365789,
+      "rmse_rub": 53749.40721115545,
+      "mae_rub": 27873.065224959657
+    },
+    "test_data_hash": "bee2f912bdc3517d728345c81e1f497279876643d5a26df48d3d3fd8681dffb1",
+    "prediction_data_hash": "b02983cbeebe5d00ed33363faf4394d46e3ed52ef261acfd94f83c820cbbb31a",
+    "target": "price_rub; all valid factual price_type values per assignment",
+    "body_policy": "one row per deal; sorted distinct group set plus primary group",
+    "limitations": [
+      "2026-10-26 source outlier marks may not have been refreshed by the nightly job.",
+      "Historical labels contain mixed customer, forwarder and carrier roles as required.",
+      "Future scoring covers DQ-valid simple requests available in core; quarantined requests are excluded.",
+      "A three-month training window cannot establish a complete annual seasonal pattern or long-term trend.",
+      "This is a fixed-snapshot evaluation, not a reconstruction of historical source versions."
+    ]
+  },
+  "checks": {
+    "raw_accounted_for": 0,
+    "core_quarantine_disjoint": 0,
+    "all_core_have_body_group": 0,
+    "known_fact_flags": 0,
+    "future_labels_null": 0
+  }
+}

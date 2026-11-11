@@ -1,0 +1,12 @@
+{
+  "run_id": "06b7e0ce-b977-44f7-ae99-7f36534d1341",
+  "command": "check",
+  "as_of": "2026-10-26",
+  "checks": {
+    "raw_accounted_for": 0,
+    "core_quarantine_disjoint": 0,
+    "all_core_have_body_group": 0,
+    "known_fact_flags": 0,
+    "future_labels_null": 0
+  }
+}

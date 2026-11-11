@@ -1,0 +1,11 @@
+[project]
+name = "freight-rate-intelligence"
+version = "1.0.0"
+description = "Reproducible freight-rate analytics and forecasting platform with PostgreSQL, Python and CatBoost"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+markers = ["integration: requires TEST_DATABASE_URL pointing at a disposable initialized PostgreSQL 17 database"]

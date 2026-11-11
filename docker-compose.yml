@@ -1,0 +1,59 @@
+services:
+  credentials:
+    image: python:3.12-slim-trixie
+    command: ["python", "/seed_credentials.py"]
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
+    volumes:
+      - db_credentials:/secrets
+      - ./docker/seed_credentials.py:/seed_credentials.py:ro
+    restart: "no"
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-deals_bigdata}
+      POSTGRES_USER: ${POSTGRES_USER:-logistics}
+      POSTGRES_PASSWORD_FILE: /secrets/postgres_password
+    command: ["postgres", "-c", "timezone=UTC", "-c", "max_parallel_workers_per_gather=0"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - db_credentials:/secrets:ro
+    depends_on:
+      credentials:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 3s
+      timeout: 5s
+      retries: 40
+    restart: unless-stopped
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: ${POSTGRES_DB:-deals_bigdata}
+      PGUSER: ${POSTGRES_USER:-logistics}
+      POSTGRES_PASSWORD_FILE: /secrets/postgres_password
+      AS_OF: ${AS_OF:-2026-10-26}
+      N_PRICES: ${N_PRICES:-300000}
+      RANDOM_SEED: ${RANDOM_SEED:-20261026}
+      ML_ITERATIONS: ${ML_ITERATIONS:-500}
+      ML_THREAD_COUNT: ${ML_THREAD_COUNT:-2}
+      ARTIFACT_DIR: /app/artifacts
+      RUN_INTERVAL_SECONDS: ${RUN_INTERVAL_SECONDS:-0}
+    volumes:
+      - db_credentials:/secrets:ro
+      - ./artifacts:/app/artifacts
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  pgdata:
+  db_credentials:

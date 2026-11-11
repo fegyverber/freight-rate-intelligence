@@ -1,0 +1,106 @@
+{
+  "verified_at_utc": "2026-11-06T11:08:27.965449+00:00",
+  "as_of": "2026-10-26",
+  "dataset_rows": 300000,
+  "environment": {
+    "postgresql": "PostgreSQL 17.11 (Debian 17.11-0+deb13u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+    "python": "3.12.14",
+    "catboost": "1.2.8",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "docker_compose_config_cli": "2.26.1-4"
+  },
+  "checks": {
+    "full_pipeline_real_postgresql17": true,
+    "source_bootstrap_reused_without_mutation": true,
+    "source_sql_unchanged": true,
+    "pytest": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 12.804
+    },
+    "exact_core_mart_ml_idempotency": true,
+    "idempotency_includes_scored_at": true,
+    "docker_compose_config": true,
+    "docker_image_build_and_container_run": false
+  },
+  "docker_limitation": "The environment has no available Docker daemon. Compose config was validated with the real CLI; full SQL/Python/ML was executed against PostgreSQL 17.11 without containers.",
+  "counts": {
+    "raw_prices": 300000,
+    "core_prices": 299797,
+    "quarantine_prices": 203,
+    "raw_cities": 42,
+    "core_cities": 40,
+    "market_cells": 203644,
+    "predictions": 18628
+  },
+  "market_reliability_counts": {
+    "HIGH": 10,
+    "LOW_DATA": 202710,
+    "MEDIUM": 924
+  },
+  "future_coverage": {
+    "source_rows": 6003,
+    "dq_valid_rows": 5998,
+    "complex_rows_excluded": 178,
+    "scored": 5820
+  },
+  "ml_metrics": {
+    "mae_rub": 27873.065224959657,
+    "mape_pct": 15.229751720365789,
+    "r2": 0.9210610930401197,
+    "rmse_rub": 53749.40721115545
+  },
+  "ml_rows": {
+    "extracted": 51012,
+    "future": 5820,
+    "predictions": 18628,
+    "test": 12808,
+    "train": 24226
+  },
+  "source_sha256": {
+    "schema.sql": "b6693ce4a1666902805974b241e5b00dc81d33e28a5a62f365d55f57b8d1e6a7",
+    "synthetic.sql": "3f0a286f6e74a0629c0d181981afdee02238095dc7d874798d04d430287cdbc3"
+  },
+  "fingerprints": {
+    "core.dim_cities": {
+      "rows": 40,
+      "sha256": "8b7f09b8c3cfa515185e43fc4d5a673ecaad917ed78cab4e18425a5782829244"
+    },
+    "core.prices": {
+      "rows": 299797,
+      "sha256": "ba61df492f17faba1ef4e946f9e93da7bb132e45ee1c76e6b5fc6aa6750c61ff"
+    },
+    "core.price_body_groups": {
+      "rows": 335077,
+      "sha256": "87f8f1e461f59e8a19a91f229d8fca86bf6adcf46473a412740d3fe8276c1a86"
+    },
+    "core.price_dates": {
+      "rows": 336576,
+      "sha256": "78816bfca56c7036b9e01184fceb2ecb27ad1d104c71d0ae75fc3ca84ac20de1"
+    },
+    "core.dq_quarantine_prices": {
+      "rows": 203,
+      "sha256": "dcfb733e9f6dae4f7d84fcc13ddb7fead2febdc1d2486605c089cb0043fd6152"
+    },
+    "mart.mart_market_corridor": {
+      "rows": 203644,
+      "sha256": "dfdc632cf7f8853f8a5fee9358b844fb22389330360d6f328fe5902fd38a35f7"
+    },
+    "mart.ml_models": {
+      "rows": 1,
+      "sha256": "d14508b730c0da99bbef441dc0d9388072bdada8e473b277796cd05f182566f0"
+    },
+    "mart.ml_evaluations": {
+      "rows": 1,
+      "sha256": "6efc928ce1c478edb98063b355312555f93d60d708040bf7a34969b1fe42b685"
+    },
+    "mart.ml_price_predictions": {
+      "rows": 18628,
+      "sha256": "4cc1d1ce211ba7e1a8a4e7b082826d75aeb9f7268e23673b114cefa49910029f"
+    }
+  }
+}
